@@ -30,7 +30,7 @@ int main()
   printf("\n-------->Checking:\n ObsrSthetaNum = %d\n ObsrSFeinum = %d\n HalfNum = %lf\n",ObsrSthetaNum, ObsrSFaiNum, HalfNum);
   // opening and reading flowdata files
   FILE *fp_f;
-  fp_f = fopen("flowdata.txt","r");
+  fp_f = fopen("FlowData.txt","r");
   //storing flowdata 
   flowData FlowD[]={0};
   for(int i =0;i<sizeof(FlowD);i++)
@@ -265,7 +265,7 @@ int main()
   ZO_temp = 0.0;
   while(indexC>=0)
     {
-      printf("[%d]: XO = %lf, YO = %lf, ZO = %lf\n",jC, XO[jC], YO[jC], ZO[jC]);
+     // printf("[%d]: XO = %lf, YO = %lf, ZO = %lf\n",jC, XO[jC], YO[jC], ZO[jC]);
       indexC--;
       OSNum = 1+jC;
       jC++;
@@ -295,11 +295,11 @@ int main()
       UnitNormal[m][0] = Nx[m]/Area[m];
       UnitNormal[m][1] = Ny[m]/Area[m];
       UnitNormal[m][2] = Nz[m]/Area[m];
-      printf("UnitNormal[%d][0] = %g\n",m,UnitNormal[m][1]);
+      printf("UnitNormal[%d][0] = %g\n",m,UnitNormal[m][0]);
     }
-  double **DataSArea, **DataSVector;
-  DataSArea = Area;
-  DataSVector = UnitNormal;
+  /*double *DataSArea, **DataSVector;
+  r = Area;
+  DataSVector = UnitNormal;*/
   
 
 
@@ -374,7 +374,7 @@ int main()
 
 	  double Omega =0.0, ka=0.0;
 		//Omega= OmegaM+BNum*(n-18)*OmegaR; /* first omega formula */
-	  Omega = (n-1)*2*PI*DF; /* second omega formula */
+	  Omega = (n)*2*PI*DF; /* second omega formula */
 	  ka = Omega/C_0;
 	  //printf("Omega[%d]=%4.4g   ka[%d] = %4.4g\n",n,Omega[n],n,ka[n]);
   
@@ -407,9 +407,12 @@ int main()
 					DY=DSY[j];
 					DZ=DSZ[j];
 					DR=sqrt(pow(DX,2)+pow(DY,2));
-					DVX = DataSVector[j][0];
+				/*	DVX = DataSVector[j][0];
 					DVY = DataSVector[j][1];
-					DVZ = DataSVector[j][2];
+					DVZ = DataSVector[j][2];*/
+                    DVX = UnitNormal[j][0];
+					DVY = UnitNormal[j][1];
+					DVZ = UnitNormal[j][2];
 					A = Area[j];
 					Dp = DSp[j];
 					Drou = DSrou[j];
@@ -431,7 +434,9 @@ int main()
 					Transc1 += PBD3[n][m][k][j];
 				
 					printf("\n------checking-----: SP1 = %g + %gi\n",creal(SP1),cimag(SP1));
-					printf("the output is PBD1[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD2[n][m][k][j]),cimag(PBD1[n][m][k][j]));
+					printf(" PBD1[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD1[n][m][k][j]),cimag(PBD1[n][m][k][j]));
+                    printf(" PBD2[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD2[n][m][k][j]),cimag(PBD2[n][m][k][j]));
+                    printf(" PBD3[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD3[n][m][k][j]),cimag(PBD3[n][m][k][j]));
 					
 		  	  	}
 				printf("the output is PBD1[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD1[n][m][k][j]),cimag(PBD1[n][m][k][j]));
@@ -443,6 +448,8 @@ int main()
 				Transb2 += PB2[n][m][k];
 				Transc2 += PB3[n][m][k];
 				printf("PB1[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB1[n][m][k]),cimag(PB1[n][m][k]));
+                printf("PB2[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB2[n][m][k]),cimag(PB2[n][m][k]));
+                printf("PB3[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB3[n][m][k]),cimag(PB3[n][m][k]));
 				
 			}
 			
@@ -470,7 +477,8 @@ int main()
 	  
 	for(int j=0;j<FNum;j++)
 	  {
-			for(int i=20;i<21;i++)
+			//for(int i=0;i<OSNum;i++)
+            for(int i=20;i<21;i++)
 			{
 									
 				fprintf(fwritepF,"%12.10f	%12.10f\n",creal(pF[j][i]),cimag(pF[j][i]));
@@ -482,16 +490,14 @@ int main()
 	
 
  Op = make_dmatrix(FNum,OSNum);
- pXOYM = make_dmatrix(FNum,OSNum);
+ //pXOYM = make_dmatrix(FNum,OSNum);
   
 		 
     for(int i=0;i<FNum;i++)
 	{
-        	for(int j=20;j<21;j++)
+        	//for(int j=0;j<OSNum;j++)
+            for(int i=20;i<21;i++)
 		{
-		
-			 	//pXOYM[i][j] = pF[i][j];
-				//printf("pXOYM[%d][%d]= %g + %g\n",i,j,creal(pXOYM[i][1]),cimag(pXOYM[i][1]));
 				printf("pF[%d][%d]= %g + %g\n",i,j,creal(pF[i][j]),cimag(pF[i][j]));
 		}
 	}
@@ -514,7 +520,7 @@ int main()
 
   for(int i=0;i<FNum;i++)
   {
-
+        //for(int i=0;i<OSNum;i++)
 		for(int j=20;j<21;j++)
 			{
 
@@ -537,18 +543,16 @@ int main()
   {
 	  //OF[rr] = (OmegaM+BNum*(rr-5)*OmegaR)/(2*PI);
 	  //OF[rr] = (OmegaM+BNum*(rr-18)*OmegaR)/(2*PI);
-		OF[rr] = ((rr-1)*2*PI*DF)/(2*PI);
+		OF[rr] = ((rr)*2*PI*DF)/(2*PI);
 		
 	  printf("OF[%d] = %g\n",rr,OF[rr]);
   }
 
 
   
-  rmdir('FD_Spectrum','s');
-  mkdir('FD_Spectrum');
-  
   FILE *fwrite1;
   fwrite1 = fopen("FDPressureSpectrum.txt","w");
+  for(int k=0;k<OSNum;k++)
   for(int k=20;k<21;k++)
   {
 	  
@@ -653,11 +657,25 @@ int main()
   
   /*--------------------freeing all used memories--------------------*/
 
+
+  free(DSX); 
+  free(DSY);  
+  free(DSZ); 
+  free(DSp); 
+  free(DSrou);
+  free(DSu);
+  free(DSv);
+  free(DSw);
+
+
+  free(Nx);
+  free(Ny);
+  free(Nz);
+
   free(XO);
   free(YO);
   free(ZO);
-  
-  /* freeing the pointer */
+
   free_vector(OTime);
 
   
@@ -695,8 +713,7 @@ int main()
   free_vector(FRM); 
   free_vector(FRP);
   free_vector(OF);
-	free_vector(Area);
-  //free(One);
+  free_vector(Area);
   
   free_4Ddmatrix(PBD1,OSNum,BNum,DSNum);
   free_4Ddmatrix(PBD2,OSNum,BNum,DSNum);
@@ -709,8 +726,9 @@ int main()
   free_dmatrix(P3,OSNum);
   free_dmatrix(pF,FNum);
   free_dmatrix(Op,FNum);
-  free_dmatrix(pXOYM,FNum);
-	free_dmatrix(UnitNormal,DSNum);
+  //free_dmatrix(pXOYM,FNum);
+  free_dmatrix(UnitNormal,DSNum);
+  //free_dmatrix(DataSVector,DSNum);
   
 
   
