@@ -387,7 +387,7 @@ int main()
 	  double complex Transc2 = 0.0 + 0.0*I;
   
 	  
-	  for(int m=0;m<OSNum;m++)//OSNum=
+	  for(int m=20;m<21;m++)//OSNum=
 	  {
 		  OX = XO[m];//the first value of XO vector
 		  OY = YO[m];// the first value of YO vector
@@ -552,7 +552,7 @@ int main()
   
   FILE *fwrite1;
   fwrite1 = fopen("FDPressureSpectrum.txt","w");
-  for(int k=0;k<OSNum;k++)
+  //for(int k=0;k<OSNum;k++)
   for(int k=20;k<21;k++)
   {
 	  
