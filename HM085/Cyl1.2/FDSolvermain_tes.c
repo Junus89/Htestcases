@@ -299,7 +299,9 @@ int main()
       UnitNormal[m][0] = Nx[m]/Area[m];
       UnitNormal[m][1] = Ny[m]/Area[m];
       UnitNormal[m][2] = Nz[m]/Area[m];
-      printf("UnitNormal[%d][0] = %g\n",m,UnitNormal[m][0]);
+      printf("UnitNormal[%d][0] = %g\n Area[%d] = %g\n",m,UnitNormal[m][0],m,Area[m]);
+      printf("UnitNormal[%d][1] = %g\n Area[%d] = %g\n",m,UnitNormal[m][1],m,Area[m]); 
+      printf("UnitNormal[%d][2] = %g\n Area[%d] = %g\n",m,UnitNormal[m][2],m,Area[m]);   
     }
   /*double *DataSArea, **DataSVector;
   r = Area;
@@ -654,6 +656,15 @@ int main()
   printf("------checking-----: DVX = %g\n",DVX);
   printf("------checking-----: DVY = %g\n",DVY);
   printf("------checking-----: DVZ = %g\n",DVZ);
+  printf("------checking-----: Area[0] = %g\n",Area[0]);
+  printf("------checking-----: Area[0] = %g\n",Area[DSNum-1]);
+  printf("------checking-----: UnitNormal[0][0] = %g\n",UnitNormal[0][0]);
+  printf("------checking-----: UnitNormal[DSNum-1][0] = %g\n",UnitNormal[DSNum-1][0]);
+  printf("------checking-----: UnitNormal[0][1] = %g\n",UnitNormal[0][0]);
+  printf("------checking-----: UnitNormal[DSNum-1][1] = %g\n",UnitNormal[DSNum-1][1]);
+  printf("------checking-----: UnitNormal[0][2] = %g\n",UnitNormal[0][0]);
+  printf("------checking-----: UnitNormal[DSNum-1][2] = %g\n",UnitNormal[DSNum-1][2]);
+
   
  /* printf("------checking-----: PBD1[34][1][1][1] = %g\n",PBD1[34][0][0][0]);
   printf("------checking-----: PBD1[155][1][1][1] = %g\n",PBD2[155][0][0][0]);
