@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define PI	3.14159265358979323846	/* pi to machine precision, defined in math.h */
+#define PI	M_PI	/* pi to machine precision, defined in math.h */
 #define TWOPI	(2.0*PI)
 
 /*
