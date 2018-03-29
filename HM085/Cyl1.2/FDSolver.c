@@ -132,14 +132,14 @@ void fifthLoop(double OmegaR,double Omega, double MaX, double MaY, double MaZ, d
 		Dp = Dp*One[i];
 		Drou = Drou*One[i];
 		
-    		Gu = Du*cos(Time[i]*OmegaR+Theta)-Dv*sin(Time[i]*OmegaR+Theta);
-   		Gv = Du*sin(Time[i]*OmegaR+Theta)+Dv*cos(Time[i]*OmegaR+Theta);
-    		Gw = Dw*One[i];
+    Gu = Du*cos(Time[i]*OmegaR+Theta)-Dv*sin(Time[i]*OmegaR+Theta);
+   	Gv = Du*sin(Time[i]*OmegaR+Theta)+Dv*cos(Time[i]*OmegaR+Theta);
+    Gw = Dw*One[i];
 		
 		
 		DataXR[i] = DR*cos(OmegaR*Time[i]+atan2(DY,DX)+Theta);
-    		DataYR[i] = DR*sin(OmegaR*Time[i]+atan2(DY,DX)+Theta);
-   		DataZR[i] = DZ*One[i];
+    DataYR[i] = DR*sin(OmegaR*Time[i]+atan2(DY,DX)+Theta);
+   	DataZR[i] = DZ*One[i];
 		
 		DOrX[i] = OX-DataXR[i];
 		DOrY[i] = OY-DataYR[i];
@@ -166,7 +166,7 @@ void fifthLoop(double OmegaR,double Omega, double MaX, double MaY, double MaZ, d
     		Vz[i] = 0.0*One[i];
 		
 		VectorX = DVX*cos(OmegaR*Time[i]+Theta)-DVY*sin(OmegaR*Time[i]+Theta);
-		VectorY = DVX*sin(OmegaR*Time[i]+Theta)-DVY*cos(OmegaR*Time[i]+Theta);
+		VectorY = DVX*sin(OmegaR*Time[i]+Theta)+DVY*cos(OmegaR*Time[i]+Theta);
 		VectorZ = DVZ*One[i];
 		
 		VuN = Gu*VectorX+Gv*VectorY+Gw*VectorZ;

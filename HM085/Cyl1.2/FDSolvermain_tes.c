@@ -370,7 +370,7 @@ int main()
   pF = make_dmatrix(FNum,OSNum);
   
   //double **pXOYM,**Op,*OF;
- 
+
 
  
   for(int n =0; n<FNum;n++)
@@ -409,53 +409,54 @@ int main()
 		  	  	{
 		  			printf("Harmonic number %d, Observer number %d, Blade number %d, Source number %d\n",n,m+1,k+1,j+1); // since m, k, j starts from zero, add it with 1
 					
-					DX=DSX[j];
-					DY=DSY[j];
-					DZ=DSZ[j];
-					DR=sqrt(pow(DX,2)+pow(DY,2));
-                    			DVX = UnitNormal[j][0];
-					DVY = UnitNormal[j][1];
-					DVZ = UnitNormal[j][2];
-					A = Area[j];
-					Dp = DSp[j];
-					Drou = DSrou[j];
-					Du = DSu[j];
-					Dv = DSv[j];
-					Dw = DSw[j];
+							DX=DSX[j];
+							DY=DSY[j];
+							DZ=DSZ[j];
+							DR=sqrt(pow(DX,2)+pow(DY,2));
+              DVX = UnitNormal[j][0];
+							DVY = UnitNormal[j][1];
+							DVZ = UnitNormal[j][2];
+							A = Area[j];
+							Dp = DSp[j];
+							Drou = DSrou[j];
+							Du = DSu[j];
+							Dv = DSv[j];
+							Dw = DSw[j];
 					
 				
 					// calling fifthLoop function
-					fifthLoop(OmegaR, Omega, MaX, MaY, MaZ, ka, pF);
+							fifthLoop(OmegaR, Omega, MaX, MaY, MaZ, ka, pF);
 					
 					
-					PBD1[n][m][k][j] = SP1;
-					PBD2[n][m][k][j] = SP2;
-					PBD3[n][m][k][j] = SP3;
+							PBD1[n][m][k][j] = SP1;
+							PBD2[n][m][k][j] = SP2;
+							PBD3[n][m][k][j] = SP3;
 					
-					Transa1 += PBD1[n][m][k][j];
-					Transb1 += PBD2[n][m][k][j];
-					Transc1 += PBD3[n][m][k][j];
+							Transa1 += PBD1[n][m][k][j];
+							Transb1 += PBD2[n][m][k][j];
+							Transc1 += PBD3[n][m][k][j];
 				
-					printf("\n------checking-----: SP1 = %g + %gi\n",creal(SP1),cimag(SP1));
-					printf(" PBD1[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD1[n][m][k][j]),cimag(PBD1[n][m][k][j]));
-                    			printf(" PBD2[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD2[n][m][k][j]),cimag(PBD2[n][m][k][j]));
-                   			printf(" PBD3[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD3[n][m][k][j]),cimag(PBD3[n][m][k][j]));
+							printf("\n------checking-----: SP1 = %g + %gi\n",creal(SP1),cimag(SP1));
+							printf(" PBD1[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD1[n][m][k][j]),cimag(PBD1[n][m][k][j]));
+          		printf(" PBD2[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD2[n][m][k][j]),cimag(PBD2[n][m][k][j]));
+          		printf(" PBD3[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD3[n][m][k][j]),cimag(PBD3[n][m][k][j]));
 					
 		  	  	}
-				printf("the output is PBD1[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD1[n][m][k][j]),cimag(PBD1[n][m][k][j]));
-				PB1[n][m][k] = Transa1;
-				PB2[n][m][k] = Transb1;
-				PB3[n][m][k] = Transc1;
+						printf("the output is PBD1[%d][%d][%d][%d] = %g + %gi\n",n,m,k,j,creal(PBD1[n][m][k][j]),cimag(PBD1[n][m][k][j]));
+						printf(" Transa1 = %g + %gi\n",creal(Transa1),cimag(Transa1));
+						PB1[n][m][k] = Transa1;
+						PB2[n][m][k] = Transb1;
+						PB3[n][m][k] = Transc1;
 				
-				Transa2 += PB1[n][m][k];
-				Transb2 += PB2[n][m][k];
-				Transc2 += PB3[n][m][k];
-				printf("PB1[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB1[n][m][k]),cimag(PB1[n][m][k]));
-                		printf("PB2[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB2[n][m][k]),cimag(PB2[n][m][k]));
-                		printf("PB3[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB3[n][m][k]),cimag(PB3[n][m][k]));
+						Transa2 += PB1[n][m][k];
+						Transb2 += PB2[n][m][k];
+						Transc2 += PB3[n][m][k];
+						printf("PB1[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB1[n][m][k]),cimag(PB1[n][m][k]));
+        		printf("PB2[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB2[n][m][k]),cimag(PB2[n][m][k]));
+        		printf("PB3[%d][%d][%d] = %g + %g\n",n,m,k,creal(PB3[n][m][k]),cimag(PB3[n][m][k]));
 				
 			}
-			
+			printf(" Transa2 = %g + %gi\n",creal(Transa2),cimag(Transa2));
 			P1[n][m] = Transa2;
 			P2[n][m] = Transb2;
 			P3[n][m] = Transc2;
@@ -465,8 +466,8 @@ int main()
 			
 			// pressure final
 		     	// OSNum = 1;
-		  	pF[n][m] = (P1[n][m]+P2[n][m]+P3[n][m])/(4*PI*Tint);
-		  	printf("pF[%d][%d]= %g + %g\n",n,m,creal(pF[n][m]),cimag(pF[n][m]));// m+1 just for show its index not zero but 1
+		  pF[n][m] = (P1[n][m]+P2[n][m]+P3[n][m])/(4*PI*Tint);
+		  printf("pF[%d][%d]= %g + %g\n",n,m,creal(pF[n][m]),cimag(pF[n][m]));// m+1 just for show its index not zero but 1
 			
 			
 	  }

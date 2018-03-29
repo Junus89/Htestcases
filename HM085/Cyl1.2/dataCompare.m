@@ -12,7 +12,7 @@ set(0,'DefaultaxesFontSize',15)
 %
 
 
-NFFT=16;
+NFFT=8;
 C0=347.18;RMatip=1.045;Ma = 0.85;
 MaX=0.0; MaY=0.0;MaZ=0.0;
 OmegaR = C0*0.85/RMatip;
@@ -56,6 +56,9 @@ print(Filename1,'-depsc');
 % %
 % refSp=importdata('Subrotatingmonopolespectra000N.dat');
 figure(2)
+hold on
+grid on
+box on
 Pspec=importdata('FDPressureSpectrum.txt');
 f=Pspec(:,1);
 pF=Pspec(:,2);
