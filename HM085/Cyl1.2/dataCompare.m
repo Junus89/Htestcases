@@ -12,7 +12,7 @@ set(0,'DefaultaxesFontSize',15)
 %
 
 
-NFFT=8;
+NFFT=512;
 C0=347.18;RMatip=1.045;Ma = 0.85;
 MaX=0.0; MaY=0.0;MaZ=0.0;
 OmegaR = C0*0.85/RMatip;
